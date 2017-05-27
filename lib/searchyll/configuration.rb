@@ -7,7 +7,7 @@ module Searchyll
 
     # Enable or disable indexing
     def elasticsearch_enabled
-      site.config['elasticsearch'].key?('enabled') ? site.config['elasticsearch']['enabled'] : true
+      ((site.config||{})['elasticsearch']||{}).key?('enabled') ? site.config['elasticsearch']['enabled'] : true
     end
 
     # Determine a URL for the cluster, or fail with error
