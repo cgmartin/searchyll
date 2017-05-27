@@ -9,6 +9,8 @@ require "nokogiri"
 begin
   indexers = {}
 
+  puts "**** ENVIRONMENT: #{Jekyll.env} ****"
+
   Jekyll::Hooks.register(:site, :pre_render) do |site|
     config = Searchyll::Configuration.new(site)
     indexers[site] = Searchyll::Indexer.new(config)
