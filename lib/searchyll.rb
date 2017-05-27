@@ -15,7 +15,7 @@ begin
       indexers[site] = Searchyll::Indexer.new(config)
       indexers[site].start
     else
-      puts 'skipping elasticsearch indexing'
+      puts 'Searchyll: Skipping Elasticsearch indexing...'
     end
   end
 
