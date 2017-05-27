@@ -6,7 +6,7 @@ require "searchyll/configuration"
 require "searchyll/indexer"
 require "nokogiri"
 
-begin
+#begin
   indexers = {}
 
   Jekyll::Hooks.register(:site, :pre_render) do |site|
@@ -40,6 +40,6 @@ begin
     })
   end
 
-rescue => e
-  puts e.message
-end
+#rescue => e
+#  puts e.message
+#end
