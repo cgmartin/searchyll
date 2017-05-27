@@ -7,7 +7,7 @@ module Searchyll
 
     # Enable or disable indexing
     def elasticsearch_enabled
-      ((site.config||{})['elasticsearch']||{}).key?('enabled') ? site.config['elasticsearch']['enabled'] : true
+      ((site.config||{})['elasticsearch']||{}).key?('enabled') ? site.config['elasticsearch']['enabled'] : site.config.key?('elasticsearch')
     end
 
     # Determine a URL for the cluster, or fail with error
@@ -18,22 +18,22 @@ module Searchyll
 
     # Getter for the number of primary shards
     def elasticsearch_number_of_shards
-      site.config['elasticsearch']['number_of_shards'] || 1
+      ((site.config||{})['elasticsearch']||{})['number_of_shards'] || 1
     end
 
     # Getter for the number of replicas
     def elasticsearch_number_of_replicas
-      site.config['elasticsearch']['number_of_replicas'] || 1
+      ((site.config||{})['elasticsearch']||{})['number_of_replicas'] || 1
     end
 
     # Getter for the index name
     def elasticsearch_index_base_name
-      site.config['elasticsearch']['index_name'] || "jekyll"
+      ((site.config||{})['elasticsearch']||{})['index_name'] || "jekyll"
     end
 
     # Getter for the default type
     def elasticsearch_default_type
-      site.config['elasticsearch']['default_type'] || 'post'
+      ((site.config||{})['elasticsearch']||{})['default_type'] || 'post'
     end
   end
 end
