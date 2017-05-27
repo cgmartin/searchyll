@@ -5,11 +5,15 @@ module Searchyll
       self.site = site
     end
 
+    # Enable or disable indexing
+    def elasticsearch_enabled
+      site.config['elasticsearch'].key?('enabled') ? site.config['elasticsearch']['enabled'] : true
+    end
+
     # Determine a URL for the cluster, or fail with error
     def elasticsearch_url
       ENV['BONSAI_URL'] || ENV['ELASTICSEARCH_URL'] ||
-        ((site.config||{})['elasticsearch']||{})['url'] ||
-        raise(ArgumentError, "No Elasticsearch URL present, skipping indexing")
+        ((site.config||{})['elasticsearch']||{})['url'] || 'http://localhost:9200/'
     end
 
     # Getter for the number of primary shards
