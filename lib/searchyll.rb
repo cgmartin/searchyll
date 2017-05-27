@@ -41,4 +41,5 @@ begin
 
 rescue => e
   puts e.message
+  puts e.backtrace
 end
