@@ -6,13 +6,13 @@ require "searchyll/configuration"
 require "searchyll/indexer"
 require "nokogiri"
 
+if Jekyll.env != 'production'
+  puts "searchyll: skipping processing for a non-production build"
+  return
+end
+
 begin
   indexers = {}
-
-  if Jekyll.env != 'production'
-    puts "searchyll: skipping processing for a non-production build"
-    return
-  end
 
   Jekyll::Hooks.register(:site, :pre_render) do |site|
     config = Searchyll::Configuration.new(site)
