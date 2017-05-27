@@ -10,8 +10,9 @@ begin
   indexers = {}
 
   Jekyll::Hooks.register(:site, :pre_render) do |site|
+    next unless Jekyll.env == 'production'
     config = Searchyll::Configuration.new(site)
-    if config.elasticsearch_enabled && Jekyll.env == 'production'
+    if config.elasticsearch_enabled
       indexers[site] = Searchyll::Indexer.new(config)
       indexers[site].start
     else
@@ -41,5 +42,4 @@ begin
 
 rescue => e
   puts e.message
-  puts e.backtrace
 end
