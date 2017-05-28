@@ -24,7 +24,7 @@ begin
     indexers[site].finish if indexers[site]
   end
 
-  Jekyll::Hooks.register :posts, :post_render do |post|
+  Jekyll::Hooks.register [:pages, :posts], :post_render do |post|
     indexer = indexers[post.site]
     next unless indexer
 
