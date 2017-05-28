@@ -43,7 +43,3 @@ end
 Jekyll::Hooks.register :posts, :post_render do |post|
   index_post(indexers[post.site], post, 'post') if indexers[post.site]
 end
-
-Jekyll::Hooks.register :documents, :post_render do |post|
-  index_post(indexers[post.site], post, 'document') if indexers[post.site]
-end
