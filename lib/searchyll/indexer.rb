@@ -159,6 +159,7 @@ module Searchyll
           { "add":    { "index": elasticsearch_index_name, "alias": configuration.elasticsearch_index_base_name }}
         ]
       }.to_json
+      puts update_aliases.body
 
       # delete old indices
       cleanup_indices = http_delete("/#{old_indices.join(',')}")
