@@ -153,13 +153,15 @@ module Searchyll
 
       # hot swap the index into the canonical alias
       update_aliases = http_post("/_aliases")
+      update_actions = [
+        { "add":    { "index": elasticsearch_index_name, "alias": configuration.elasticsearch_index_base_name }}
+      ]
+      update_actions.push(
+        { "remove": { "index": old_indices.join(','), "alias": configuration.elasticsearch_index_base_name }}
+      ) unless old_indices.empty?
       update_aliases.body = {
-        "actions": [
-          { "remove": { "index": old_indices.join(','), "alias": configuration.elasticsearch_index_base_name }},
-          { "add":    { "index": elasticsearch_index_name, "alias": configuration.elasticsearch_index_base_name }}
-        ]
+        "actions": update_actions
       }.to_json
-      puts update_aliases.body
 
       # delete old indices
       cleanup_indices = http_delete("/#{old_indices.join(',')}")
