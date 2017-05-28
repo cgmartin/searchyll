@@ -33,10 +33,9 @@ begin
     nokogiri_doc = Nokogiri::HTML(post.output)
 
     puts %(indexing #{post.url})
-    pp post
 
     indexer << post.data.merge({
-      id:     post.id,
+      id:     defined? post.id ? post.id : post.name,
       url:    post.url,
       text:   nokogiri_doc.xpath("//article//text()").to_s.gsub(/\s+/, " ")
     })
