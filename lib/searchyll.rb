@@ -5,6 +5,7 @@ require "jekyll/generator"
 require "searchyll/configuration"
 require "searchyll/indexer"
 require "nokogiri"
+require "pp"
 
 begin
   indexers = {}
@@ -32,6 +33,7 @@ begin
     nokogiri_doc = Nokogiri::HTML(post.output)
 
     puts %(indexing #{post.url})
+    pp post
 
     indexer << post.data.merge({
       id:     post.id,
